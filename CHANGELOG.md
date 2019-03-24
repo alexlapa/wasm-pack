@@ -1,5 +1,46 @@
 # Changelog
 
+## 🌤️ 0.8.0
+
+- ### ✨ Features
+
+- ### 🤕 Fixes
+
+    - **Fix panics in `build mode --no-install` - [alexcrichton], [pull/598]**
+
+        This commit fixes the `wasm-pack build --mode no-install` command from
+        unconditionally panicking as well as `--mode force`. These steps were
+        calling an `unwrap()` on an internal `Option<T>` which was supposed to
+        be set during `step_install_wasm_bindgen`, but that step wasn't run in
+        these modes. The mode configuration of steps has been refactored
+        slightly to ensure that more steps are shared between these modes to
+        reduce duplication.
+
+        [pull/598]: https://github.com/rustwasm/wasm-pack/pull/598
+
+- ### 📖 Documentation
+
+    - **Document `--out-dir` flag -[ashleygwilliams], [issue/592] [pull/593]**
+
+        Recently, someone asked on Discord about customizing the name of the directory
+        that contains the assets built by `wasm-pack`. We've had the `out-dir` flag for
+        a while, but it wasn't documented! Now it is.
+
+        [issue/592]: https://github.com/rustwasm/wasm-pack/issues/592
+        [pull/593]: https://github.com/rustwasm/wasm-pack/pull/593
+
+- ### 🛠️ Maintenance
+
+    - **Move `binary-install` to its own repo - [drager], [issue/500] [pull/600]**
+
+        `binary-install` is a crate that holds the abstractions for how `wasm-pack` downloads
+        and caches pre-built binaries for the tools it wraps. It was originally part of the
+        `wasm-pack` code, then moved into a workspace as an independent crate. Now that we
+        believe it's stable, we've moved it into its own [repo](https://github.com/rustwasm/binary-install)!
+
+        [issue/500]: https://github.com/rustwasm/wasm-pack/issues/500
+        [pull/600]: https://github.com/rustwasm/wasm-pack/pull/600
+
 ## 🌤️ 0.7.0
 
 - ### ✨ Features
