@@ -129,7 +129,7 @@ pub fn cargo_install_wasm_bindgen(
         tmp.display()
     );
     fs::create_dir_all(&tmp)
-        .context("failed to create temp dir for `cargo install wasm-bindgen`")?;
+        .context(format!("failed to create temp dir {} for `cargo install wasm-bindgen`", &tmp.to_string_lossy()))?;
 
     let mut cmd = Command::new("cargo");
     cmd.arg("install")
